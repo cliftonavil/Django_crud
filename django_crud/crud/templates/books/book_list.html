@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Books</title>
+    <style>
+table, th, td
+{
+border: 1px solid black;
+border-collapse: collapse;
+    }
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+  </style>
+</head>
+
+
+<body>
+
+{% block content %}
+
+<h2><a href="{% url 'crud:book_new' %}">Create New Book</a></h2>
+
+<table style="width:100%">
+    <caption><h1>List of Books</h1></caption>
+    <tr>
+        <th><center>Book Name</center></th>
+        <th><center>Author</center></th>
+        <th><center>Publish Year</center></th>
+        <th><center>Total Pages</center></th>
+        <th><center>Price</center></th>
+        <th><center>Status</center></th>
+        <th><center>Update</center></th>
+        <th><center>Delete</center></th>
+    </tr>
+
+    {% for book in object_list %}
+    <tr>
+        <td><center>{{ book.name }}</center></td>
+        <td><center>{{book.author}}</center></td>
+        <td><center>{{book.publish_year}}</center></td>
+        <td><center>{{book.pages }}</center></td>
+        <td><center>{{book.price}}</center></td>
+        <td><center>{{book.status}}</center></td>
+        <td><center><a href="{% url 'crud:book_edit' book.id %}" >Edit</a></center></td>
+        <td><center><a href="{% url 'crud:book_delete' book.id %}" onclick="return confirm('You are About to Delete {{ book.name }}');">Delete</a></center></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
+</body>
+</html>
